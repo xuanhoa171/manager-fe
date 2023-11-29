@@ -1,0 +1,144 @@
+I. Mô tả bài toán: 
+Một công ty bảo vệ hoặc 1 tổ bảo vệ tuần tra được phân công tuần tra và bảo vệ tại nhiều khu vực khác nhau có khoảng cách rộng
+Tuy vậy, việc quản lí đội ngũ bảo vệ đến tuần tra gặp nhiều bất cập nên hệ thống sinh ra để giải quyết các vấn đề sau: 
+-	Đội trưởng tổ bảo vệ hoặc người có thẩm quyền sẽ phân công khu vực cần tuần tra cho bảo vệ bao gồm thông tin địa điểm, thời gian bắt đầu cần tuần tram thời gian tối thiểu phải tuần tra tại khu vực, thời gian muộn nhất được đến tuần tra, … Sau khi tạo thành công thông tin địa điểm và cấu hình cho địa điểm cần tuần tra thì người quản lí cần in mã địa điểm cần tuần tra dưới dàng mã QR để bảo vệ có thể quét mã và xác nhận vị trí.
+-	Bảo vệ sẽ đến vị trí cần tuần tra, mở ứng dụng, đăng nhập và thực hiện quét mã để xác nhận rằng đã đến đây tuần tra.
+-	Tuần tra thành công sẽ luê thông tin trên hệ thống cho phép người bảo vệ cũng như người quản lí có thể xem thông tin tuần tra tại các khu vực.
+-	Cần làm thêm tính năng báo lỗi (Đơn từ) trong trường hợp hệ thống bị lỗi hoặc là quét QR không được.
+Sẽ có các loại đơn sau: 
+-	Đơn giải trình tuần tra (Người bảo vệ có đến địa điểm đó để tuần tra nhưng mà không thể quét mã hoặc là không thể lấy vị trí)
+-	Đơn xin tuần tra muộn
+-	Đơn báo quên checkout 
+
+II. Phân quyền theo người dùng
+Sơ đồ tổ chức của công ty như sau:
+Giám đốc quản lý các quản lý khu vực
+Quản lý khu vực quản lý các đội trưởng bảo vệ
+Đội trưởng bảo vệ quản lý các bảo vệ
+
+Về nhân sự: Giám đốc sẽ quản lý các quản lý khu vực
+Quản lý khu vực sẽ quản lý các quản lí địa điểm
+quản lí địa điểm sẽ quản lý các nhân viên
+
+Note: Cũng có thể có trường hợp đơn vị nhỏ, giám đốc là người quản lý trực tiếp khu vực, hoặc là người quản lý trực tiếp các tổ bảo vệ. Vậy nên đội trưởng bảo vệ có quyền gì, quản lý khu vực có quyền đó. Quản lý khu vực có quyền gì, giám đốc có quyền đó
+
+1. Tính năng chung:
+- Đăng nhập
+- Đăng xuất
+- Thay đổi ngôn ngữ
+- Đổi mật khẩu
+- Lấy lại mật khẩu
+
+2. Giám đốc
+2.1. Quản lý nhân viên
+	2.1.1. Xem danh sách nhân viên (Tất cả nhân viên):
+		- Lọc nhân viên công ty theo quyền hạn, khu vực tuần tra
+		- Tìm kiếm nhân viên theo tên
+	2.1.2. Thêm, xóa nhân viên
+	2.1.3. Xem thông tin chi tiết 1 nhân viên	
+		- Xem thông tin: Tên người dùng, số điện thoại, quyền người dùng, địa chỉ
+		- Thay đổi thông tin cá nhân
+		- Phân quyền nhân viên (Quản lý, quản lí địa điểm, nhân viên)
+2.2. Quản lý tổ bảo vệ
+	2.2.1. Xem danh sách các tổ bảo vệ (Tất cả tổ bảo vệ): Thông tin về địa điểm bảo vệ, người quản lý trực tiếp (Quản lý khu vực), tên đội, đội trưởng, số lượng nhân viên
+	2.2.2. Thêm, xóa tổ bảo vệ
+	2.2.3. Xem thông tin chi tiết 1 tổ bảo vệ
+		a) Xem thông tin tổ: Thông tin về quản lí địa điểm, danh sách các khu vực tuần tra tổ phụ trách, danh sách nhân viên bảo vệ trong 1 tổ
+		b) Thay đổi thông tin tổ: Tên tổ
+		c) Thêm, xóa nhân viên trong 1 tổ bảo vệ
+		d) Thay đổi người quản lý trực tiếp
+		e) Thay đổi quản lí địa điểm
+2.3. Quản lý khu vực tuần tra
+	2.3.1. Xem danh sách các khu vực tuần tra (Tất cả khu vực tuần tra): Thông tin về tên khu vực tuần tra, địa điểm, người quản lý trực tiếp (quản lý khu vực), danh sách tên các tổ bảo vệ khu vực tuần tra
+	2.3.2. Thêm, xóa khu vực tuần tra
+	2.3.3. Xem thông tin chi tiết 1 khu vực tuần tra
+		a) Quản lý thông tin khu vực: tên, địa điểm, người quản lý trực tiếp (Quản lý khu vực), tọa độ
+			- Xem thông tin khu vực
+			- Cập nhật thông tin khu vực
+		c) Quản lý điểm tuần tra:
+			- Xem danh sách điểm tuần tra
+			- Xem vị trí của các điểm tuần tra trên map và tổ phụ trách tuần tra điểm đó
+			- Thêm, xóa điểm tuần tra
+			- Sửa điểm tuần tra:
+				+ Thay đổi phương thức xác thực tuần tra: QR, wifi, vị trí
+				+ Thay đổi tổ phụ trách tuần tra
+2.4. Quản lý đơn từ (Tất cả nhân viên)
+	2.4.1. Quản lý đơn xin nghỉ
+		a) Quản lý đơn chưa duyệt
+		b) Quản lý đơn đã duyệt
+		c) Quản lý đơn đã bị từ chối
+	2.4.4. Quản lý đơn tuần tra
+		a) Quản lý đơn giải trình tuần tra
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+		b) Quản lý đơn xin tuần tra muộn
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+		c) Quản lý đơn báo quên checkout
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+
+	Trong tất cả các đơn, đều có:
+	- Thời gian tạo đơn
+	- Người tạo đơn
+	- Trạng thái đơn
+	- Người duyệt đơn (Bỏ trống nếu chưa có người duyệt đơn)
+
+3. Quản lý khu vực
+3.1. Quản lý nhân viên (Phía backend lọc những nhân viên, chỉ trả về cho quản lý khu vực những nhân viên trong tổ mà quản lý này phụ trách)
+	3.1.1. Xem danh sách nhân viên:
+		- Lọc nhân viên công ty theo quyền hạn, khu vực tuần tra
+		- Tìm kiếm nhân viên theo tên
+	3.1.2. Thêm, xóa nhân viên (Nhân viên được thêm bởi quản lý khu vực này sẽ tự động nhận quản lý khu vực này là người quản lý trực tiếp)
+	3.1.3. Xem thông tin chi tiết 1 nhân viên
+		- Xem thông tin: Người quản lý trực tiếp, quyền hạn, khu vực phụ trách tuần tra
+		- Phân quyền nhân viên
+		- Thay đổi thông tin cá nhân
+3.2. Quản lý tổ bảo vệ (Phía backend lọc những nhân viên, chỉ trả về cho quản lý khu vực những tổ bảo vệ quản lý khu vực này phụ trách)
+	3.2.1. Xem danh sách các tổ bảo vệ: Thông tin về địa điểm bảo vệ, người quản lý trực tiếp (Quản lý khu vực), tên đội, đội trưởng, số lượng nhân viên
+	3.2.2. Thêm, xóa tổ bảo vệ (Tổ bảo vệ được thêm bởi quản lý khu vực này sẽ tự động nhận quản lý khu vực này là người quản lý trực tiếp)
+	3.2.3. Xem thông tin chi tiết 1 tổ bảo vệ
+		a) Xem thông tin tổ: Thông tin về quản lí địa điểm, danh sách các khu vực tuần tra tổ phụ trách, danh sách nhân viên bảo vệ trong 1 tổ
+		b) Thêm, sửa, xóa nhân viên trong 1 tổ bảo vệ
+		d) Thay đổi quản lí địa điểm
+3.3. Quản lý khu vực tuần tra (Phía backend lọc khu vực tuần tra, chỉ trả về cho quản lý khu vực những khu vực tuần tra quản lý phụ trách)
+	3.3.1. Xem danh sách các khu vực tuần tra: Thông tin về tên khu vực tuần tra, địa điểm, người quản lý trực tiếp (quản lý khu vực), danh sách tên các tổ bảo vệ khu vực tuần tra
+	3.3.2. Thêm, xóa khu vực tuần tra (Khu vực tuần tra được thêm bởi quản lý khu vực này sẽ tự động nhận quản lý khu vực này là người quản lý trực tiếp)
+	3.3.3. Xem thông tin chi tiết 1 khu vực tuần tra
+		a) Quản lý thông tin khu vực: tên, địa điểm, người quản lý trực tiếp (Quản lý khu vực), tọa độ
+			- Xem thông tin khu vực
+			- Cập nhật thông tin khu vực
+		c) Quản lý điểm tuần tra:
+			- Xem danh sách điểm tuần tra
+			- Xem vị trí của các điểm tuần tra trên map và tổ phụ trách tuần tra điểm đó
+			- Thêm, xóa điểm tuần tra
+			- Sửa điểm tuần tra:
+				+ Thay đổi phương thức xác thực tuần tra: QR, wifi, vị trí
+				+ Thay đổi tổ phụ trách tuần tra
+3.4. Quản lý đơn từ (Chỉ quản lý nhân viên quản lý khu vực này phụ trách)
+	3.4.1. Quản lý đơn xin nghỉ
+		a) Quản lý đơn chưa duyệt
+		b) Quản lý đơn đã duyệt
+		c) Quản lý đơn đã bị từ chối
+	3.4.4. Quản lý đơn tuần tra
+		a) Quản lý đơn giải trình tuần tra
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+		b) Quản lý đơn xin tuần tra muộn
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+		c) Quản lý đơn báo quên checkout
+			-Quản lý đơn chưa duyệt
+			-Quản lý đơn đã duyệt
+			-Quản lý đơn đã bị từ chối
+
+	Trong tất cả các đơn, đều có:
+	- Thời gian tạo đơn
+	- Người tạo đơn
+	- Trạng thái đơn
+	- Người duyệt đơn (Bỏ trống nếu chưa có người duyệt đơn)

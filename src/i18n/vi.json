@@ -1,0 +1,208 @@
+{
+  "global": {
+    "enable": "Bật",
+    "disable": "Tắt"
+  },
+  "menu": {
+    "dashboard": "Bảng thống kê",
+    "users": "Quản lý người dùng",
+    "organization": "Quản lý tổ chức",
+    "shifts": "Quản lý ca làm việc",
+    "requestForm": "Quản lý đơn từ",
+    "submenu": {
+      "requestForm": {
+        "leaveRequest": "Đơn giải trình",
+        "lateAttendanceRequest": "Quản lí chấm công",
+        "forgotCheckoutReport": "Đơn báo quên checkout"
+      }
+    }
+  },
+  "profile": {
+    "socialProfile": "Thông tin cá nhân",
+    "logout": "Đăng xuất"
+  },
+  "pages": {
+    "users": {
+      "addUser": "Thêm người dùng",
+      "editUser": "Cập nhật thông tin người dùng",
+      "deleteUser": "Xóa người dùng",
+      "exportUserData": "Xuất dữ liệu"
+    },
+    "organization": {
+      "addOrganization": "Thêm tổ chức",
+      "editOrganization": "Cập nhật thông tin tổ chức",
+      "deleteOrganization": "Xóa tổ chức",
+      "exportOrganizationData": "Xuất dữ liệu"
+    },
+    "shift": {
+      "addShift": "Thêm ca làm việc",
+      "editShift": "Cập nhật thông tin ca",
+      "deleteShift": "Xóa ca làm việc"
+    },
+    "requestForm": {}
+  },
+  "table": {
+    "user": {
+      "orgIds": "ID tổ chức",
+      "role": "Quyền người dùng",
+      "name": "Tên người dùng",
+      "email": "Email",
+      "username": "Tên đăng nhập",
+      "id": "ID người dùng",
+      "actions": "Thao tác",
+      "password": "Mật khẩu"
+    },
+    "place": {
+      "minimumTime": "Thời gian chấm công tối thiểu",
+      "status": "Trạng thái chấm công",
+      "wifi": "Wifi",
+      "mac": "MAC",
+      "lat": "Vĩ độ",
+      "long": "Kinh độ",
+      "orgId": "ID tổ chức",
+      "r": "Bán kính sai số",
+      "address": "Địa chỉ",
+      "name": "Tên điểm chấm công",
+      "timeStart": "Thời gian bắt đầu",
+      "timeEnd": "Thời gian kết thúc",
+      "ipAddress": "Địa chỉ IP",
+      "macAddress": "Địa chỉ MAC",
+      "id": "ID địa điểm",
+      "actions": "Thao tác"
+    },
+    "organization": {
+      "fullname": "Tên tổ chức",
+      "name": "Tên rút gọn",
+      "code": "Mã tổ chức",
+      "leader": "Quản lí địa điểm",
+      "id": "ID tổ chức",
+      "actions": "Thao tác"
+    },
+    "requestForm": {
+      "makePeople": "Người làm đơn",
+      "place": "Địa điểm",
+      "typeForm": "Kiểu chấm",
+      "dateexplain": "Ngày làm đơn",
+      "active": "Trạng thái",
+      "approvalpeople": "Người duyệt",
+      "custom": "Thao tác",
+      "decription": "Chi tiết",
+      "approvaled": "Đã duyệt",
+      "notapprovedyet": "Chưa duyệt",
+      "checkin": "Chấm vào",
+      "checkout": "Chấm ra"
+    }
+  },
+  "modal": {
+    "user": {
+      "addUser": "Thêm người dùng",
+      "editUser": "Thay đổi thông tin người dùng",
+      "updatePassword": "Cập nhật mật khẩu",
+      "cancel": "Hủy bỏ",
+      "submitAddUser": "Xác nhận",
+      "submitEditUser": "Xác nhận",
+      "submitUpdatePassword": "Xác nhận",
+      "updatePasswordBtn": "Thay đổi mật khẩu"
+    },
+    "place": {
+      "addPlace": "Thêm điểm chấm công",
+      "editPlace": "Cập nhật điểm chấm công",
+      "cancel": "Hủy bỏ",
+      "submitAddPlace": "Xác nhận",
+      "submitEditPlace": "Xác nhận",
+      "placeInformation": "Thông tin điểm chấm công",
+      "selectPlacePosition": "Chọn vị trí điểm chấm công",
+      "configTime": "Cấu hình thời gian chấm công",
+      "settingPlace": "Cài đặt điểm chấm công",
+      "checkWifi": "Kiểm tra Wifi",
+      "checkMAC": "Kiểm tra MAC"
+    },
+    "organization": {
+      "addOrganization": "Thêm tổ chức",
+      "editOrganization": "Cập nhật tổ chức",
+      "cancel": "Hủy bỏ",
+      "submitAddOrganization": "Xác nhận",
+      "submitEditOrganization": "Xác nhận"
+    }
+  },
+  "input": {
+    "label": {
+      "user": {
+        "username": "Tên đăng nhập",
+        "name": "Tên người dùng",
+        "password": "Mật khẩu",
+        "email": "Email",
+        "role": "Quyền người dùng",
+        "organization": "Tổ chức",
+        "newPassword": "Mật khẩu mới",
+        "reTypeNewPassword": "Nhập lại mật khẩu mới"
+      },
+      "organization": {
+        "fullname": "Tên đầy đủ",
+        "name": "Tên rút gọn",
+        "code": "Mã tổ chức",
+        "leader": "Quản lí địa điểm"
+      },
+      "place": {
+        "minimumTime": "Thời gian chấm công tối thiểu",
+        "status": "Trạng thái chấm công",
+        "wifi": "Wifi",
+        "mac": "MAC",
+        "lat": "Vĩ độ",
+        "long": "Kinh độ",
+        "orgId": "ID tổ chức",
+        "r": "Bán kính sai số",
+        "address": "Địa chỉ",
+        "name": "Tên điểm chấm công",
+        "timeStart": "Thời gian bắt đầu",
+        "timeEnd": "Thời gian kết thúc",
+        "wifiName": "Tên Wifi",
+        "ipAddress": "Địa chỉ IP",
+        "macAddress": "Địa chỉ MAC"
+      }
+    },
+    "error": {
+      "user": {
+        "invalidEmail": "Email không hợp lệ",
+        "pleaseEnterEmail": "Vui lòng nhập email",
+        "pleaseEnterPassword": "Vui lòng nhập mật khẩu",
+        "passwordsDoNotMatch": "Mật khẩu không khớp",
+        "passwordMinLength": "Mật khẩu phải có ít nhất 5 ký tự",
+        "passwordRequirements": "Mật khẩu phải chứa ít nhất 1 chữ cái và 1 số",
+        "nameTooLong": "Tên của bạn quá dài",
+        "pleaseEnterUsername": "Vui lòng nhập tên người dùng",
+        "usernameNoSpecialChars": "Tên người dùng không được chứa ký tự đặc biệt",
+        "usernameNoSpaces": "Tên người dùng không được chứa dấu cách",
+        "pleaseSelectUserRole": "Vui lòng chọn role người dùng",
+        "pleaseSelectOrganization": "Vui lòng chọn tổ chức",
+        "pleaseSelectAtLeastOneOrganization": "Vui lòng chọn ít nhất một tổ chức"
+      },
+      "organization": {
+        "organizationNameTooLong": "Tên tổ chức quá dài",
+        "pleaseEnterOrganizationName": "Vui lòng nhập tên tổ chức",
+        "abbreviatedNameTooLong": "Tên tổ chức rút gọn quá dài",
+        "pleaseEnterAbbreviatedName": "Vui lòng nhập tên tổ chức rút gọn",
+        "specialCharactersNotAllowed": "Mã tổ chức không được chứa ký tự đặc biệt",
+        "pleaseEnterOrganizationCode": "Vui lòng nhập mã tổ chức",
+        "spacesNotAllowed": "Mã tổ chức không được chứa dấu cách"
+      },
+      "place": {
+        "placeNameTooLong": "Tên điểm chấm công quá dài",
+        "pleaseEnterPlaceName": "Vui lòng nhập tên điểm chấm công",
+        "addressTooLong": "Địa chỉ quá dài",
+        "pleaseEnterAddress": "Vui lòng nhập địa chỉ",
+        "pleaseEnterRadius": "Vui lòng điền bán kính sai số",
+        "pleaseSelectStartTime": "Vui lòng chọn thời gian bắt đầu ca trực",
+        "pleaseSelectEndTime": "Vui lòng chọn thời gian kết thúc ca trực",
+        "pleaseEnterLatitude": "Vui lòng nhập vĩ độ",
+        "pleaseEnterLongitude": "Vui lòng nhập kinh độ",
+        "pleaseEnterWifiName": "Vui lòng nhập tên wifi",
+        "pleaseEnterIPAddress": "Vui lòng nhập địa chỉ IP",
+        "pleaseEnterMacAddress": "Vui lòng nhập MAC Address",
+        "invalidWifiName": "Tên Wifi không hợp lệ",
+        "invalidIPAddress": "Địa chỉ IP không hợp lệ",
+        "invalidMACAddress": "Địa chỉ MAC không hợp lệ"
+      }
+    }
+  }
+}
