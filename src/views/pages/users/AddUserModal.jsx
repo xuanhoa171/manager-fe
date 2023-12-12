@@ -6,14 +6,12 @@ import { Input, Selector } from '~/ui-component/atoms';
 import styled from 'styled-components';
 import { useCallback, memo } from 'react';
 import { roles } from '~/store/constant';
-import { useOrganizationsStore } from '~/hooks/organizations';
 import { useUsersStore } from '~/hooks/users';
 import { useAuthenticationStore } from '~/hooks/authentication';
 import { useTranslation } from 'react-i18next';
 
 const AddUserModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
-  const { organizationsState, dispatchGetAllOrganizations } = useOrganizationsStore();
   const { authenticationState } = useAuthenticationStore();
   const [newRoles, setNewRoles] = useState([]);
   const { dispatchAddUser } = useUsersStore();
@@ -29,28 +27,17 @@ const AddUserModal = ({ open, setOpen }) => {
       email: '',
       password: '',
       name: '',
-      username: '',
-      role: 'user',
-      orgIds: []
+      role: 'user'
     },
     validationSchema: yup.object({
       email: yup.string().email(t('input.error.user.invalidEmail')).required(t('input.error.user.pleaseEnterEmail')),
       password: yup
         .string()
-        .min(5, t('input.error.user.passwordMinLength'))
+        .min(8, t('input.error.user.passwordMinLength'))
         .matches(/^(?=.*[a-z])(?=.*[0-9])/, t('input.error.user.passwordRequirements'))
         .required(t('input.error.user.pleaseEnterPassword')),
       name: yup.string().max(100, t('input.error.user.nameTooLong')).required(t('input.error.user.pleaseEnterUsername')),
-      username: yup
-        .string()
-        .matches(/^[a-zA-Z0-9_]+$/, t('input.error.user.usernameNoSpecialChars'))
-        .required(t('input.error.user.pleaseEnterUsername'))
-        .test('no-spaces', t('input.error.user.usernameNoSpaces'), (value) => !/\s/.test(value)),
-      role: yup.string().required(t('input.error.user.pleaseSelectUserRole')),
-      orgIds: yup
-        .array()
-        .required(t('input.error.user.pleaseSelectOrganization'))
-        .test('not-empty', t('input.error.user.pleaseSelectAtLeastOneOrganization'), (value) => value && value.length > 0)
+      role: yup.string().required(t('input.error.user.pleaseSelectUserRole'))
     }),
     onSubmit: (values) => {
       formik.validateForm().then(() => {
@@ -59,8 +46,6 @@ const AddUserModal = ({ open, setOpen }) => {
             name: values.name,
             email: values.email,
             role: values.role,
-            org_ids: values.orgIds,
-            username: values.username,
             password: values.password
           });
 
@@ -83,27 +68,6 @@ const AddUserModal = ({ open, setOpen }) => {
     [formik]
   );
 
-  const handleChangeOrgIds = useCallback(
-    (value) => {
-      if (!Array.isArray(value)) value = [value];
-      formik.setFieldValue('orgIds', value);
-    },
-    [formik]
-  );
-
-  const organizations = useMemo(() => {
-    return (
-      organizationsState.organizations.map((one) => ({
-        label: one.fullname,
-        value: one.id
-      })) || []
-    );
-  }, [organizationsState.organizations]);
-
-  useEffect(() => {
-    dispatchGetAllOrganizations();
-  }, [dispatchGetAllOrganizations]);
-
   return (
     <>
       <Modal
@@ -117,26 +81,6 @@ const AddUserModal = ({ open, setOpen }) => {
         cancelText={t('modal.user.cancel')}
       >
         <EditUserWrapper>
-          <Input
-            label={`* ${t('input.label.user.username')}`}
-            name="username"
-            message={formik.touched.username ? formik.errors.username : ''}
-            type={formik.touched.username && formik.errors.username ? 'error' : ''}
-            value={formik.values.username}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            labelStyle={{
-              padding: '2px'
-            }}
-            style={{
-              width: '100%',
-              marginTop: '8px',
-              height: '70px'
-            }}
-            inputStyle={{
-              width: '100%'
-            }}
-          />
           <Input
             label={`* ${t('input.label.user.email')}`}
             name="email"
@@ -218,27 +162,6 @@ const AddUserModal = ({ open, setOpen }) => {
             onChange={handleChangeRole}
             message={formik.touched.role ? formik.errors.role : ''}
             type={formik.touched.role && formik.errors.role ? 'error' : ''}
-          />
-          <Selector
-            label={`* ${t('input.label.user.organization')}`}
-            name="orgIds"
-            mode={formik.values.role === 'manager' || formik.values.role === 'admin' ? 'multiple' : ''}
-            labelStyle={{
-              padding: '2px'
-            }}
-            style={{
-              width: '100%',
-              marginTop: '8px',
-              height: '70px'
-            }}
-            selectStyle={{
-              width: '100%'
-            }}
-            options={organizations}
-            value={formik.values.orgIds}
-            onChange={handleChangeOrgIds}
-            message={formik.touched.orgIds ? formik.errors.orgIds : ''}
-            type={formik.touched.orgIds && formik.errors.orgIds ? 'error' : ''}
           />
         </EditUserWrapper>
       </Modal>

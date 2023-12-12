@@ -8,16 +8,14 @@ import MainCard from '~/ui-component/cards/MainCard';
 import { DataTable } from '~/ui-component/molecules';
 import Pagination from '@mui/material/Pagination';
 import IconButton from '@mui/material/IconButton';
-import AddUserModal from './AddUserModal';
-import ChangePasswordModal from './ChangePasswordModal';
-import UpdateUserModal from './UpdateUserModal';
+import AddClassModal from './AddClassModal';
+import UpdateClassModal from './UpdateClassModal';
 import { Popconfirm, Button } from 'antd';
-import { useUsersStore } from '~/hooks/users';
 import { useTranslation } from 'react-i18next';
-
-const UsersPage = () => {
+import { useTeacherStore } from '../../../hooks/teacher';
+const ClassPage = () => {
   const { t } = useTranslation();
-  const { usersState, dispatchGetAllUsers, dispatchDeleteUser } = useUsersStore();
+  const { teachersState, dispatchGetAllTeacher } = useTeacherStore();
 
   const [page, setPage] = useState(1);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
@@ -26,22 +24,23 @@ const UsersPage = () => {
     status: false,
     id: ''
   });
+
   const [openEditPasswordModal, setOpenEditPasswordModal] = useState({
     status: false,
     id: ''
   });
 
   useEffect(() => {
-    dispatchGetAllUsers();
-  }, [dispatchGetAllUsers]);
+    dispatchGetAllTeacher(1);
+  }, [dispatchGetAllTeacher]);
 
   useEffect(() => {
-    setPage(usersState.pagination.currentPage);
-  }, [usersState.pagination.currentPage]);
+    setPage(teachersState.pagination.currentPage);
+  }, [teachersState.pagination.currentPage]);
 
-  const users = useMemo(() => {
-    return usersState.users;
-  }, [usersState.users]);
+  const teacher = useMemo(() => {
+    return teachersState.teacher;
+  }, [teachersState.teacher]);
 
   const handleChangeEditUserModal = useCallback((props) => {
     if (typeof props === 'boolean') {
@@ -104,14 +103,17 @@ const UsersPage = () => {
     dispatchDeleteUser({
       id: params?.id || ''
     });
-    // setPage(1)
+    setPage(1);
   };
 
   // Ngoài những thuộc tính trong này, có thể xem thêm thuộc tính của columns table trong ~/ui-component/molecules/DataTable nha. Có giải thích rõ ràng ở đó
   const columns = [
-    { field: 'name', headerName: t('table.user.name'), flex: 3, align: 'center', headerAlign: 'center' },
-    { field: 'email', headerName: t('table.user.email'), flex: 3, align: 'center', headerAlign: 'center' },
-    { field: 'role', headerName: t('table.user.role'), flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'name', headerName: t('table.user.name'), flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'email', headerName: t('table.user.email'), flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'phoneNumber', headerName: 'Số điện thoại', flex: 3, align: 'center', headerAlign: 'center' },
+    { field: 'birthday', headerName: 'Ngày sinh', flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'address', headerName: 'Địa chỉ', flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'teachingschedule', headerName: 'Lịch dạy', flex: 2, align: 'center', headerAlign: 'center' },
     {
       field: 'actions',
       headerName: t('table.user.actions'),
@@ -135,10 +137,10 @@ const UsersPage = () => {
 
   const handleChange = useCallback(
     (event, value) => {
-      dispatchGetAllUsers({ params: { page: value } });
+      dispatchGetAllTeacher({ params: { page: value } });
       setPage(value);
     },
-    [dispatchGetAllUsers]
+    [dispatchGetAllTeacher]
   );
 
   return (
@@ -158,24 +160,23 @@ const UsersPage = () => {
         </Button>
       </ControlBar>
       <DataTableWrapper>
-        <DataTable columns={columns} rows={users} checkboxSelection={false} />
+        <DataTable columns={columns} rows={teacher} checkboxSelection={false} />
       </DataTableWrapper>
       <PaginationWrapper>
-        <Pagination count={usersState.pagination.totalPages} page={page} onChange={handleChange} color="primary" />
+        <Pagination count={teachersState.pagination.totalPages} page={page} onChange={handleChange} color="primary" />
       </PaginationWrapper>
-      <AddUserModal open={openAddUserModal} setOpen={setOpenAddUserModal} />
-      <UpdateUserModal
+      <AddClassModal open={openAddUserModal} setOpen={setOpenAddUserModal} />
+      <UpdateClassModal
         id={openEditUserModal.id}
         open={openEditUserModal.status}
         setOpen={handleChangeEditUserModal}
         handleChangeEditPasswordModal={handleChangeEditPasswordModal}
       />
-      <ChangePasswordModal id={openEditPasswordModal.id} open={openEditPasswordModal.status} setOpen={handleChangeEditPasswordModal} />
     </MainCard>
   );
 };
 
-export default memo(UsersPage);
+export default memo(ClassPage);
 
 const ControlBar = styled.div`
   width: 100%;

@@ -8,17 +8,15 @@ import MainCard from '~/ui-component/cards/MainCard';
 import { DataTable } from '~/ui-component/molecules';
 import Pagination from '@mui/material/Pagination';
 import IconButton from '@mui/material/IconButton';
-import AddUserModal from './AddUserModal';
-import ChangePasswordModal from './ChangePasswordModal';
-import UpdateUserModal from './UpdateUserModal';
+import AddCourseModal from './AddCourseModal';
+import UpdateCourseModal from './UpdateCourseModal';
 import { Popconfirm, Button } from 'antd';
-import { useUsersStore } from '~/hooks/users';
 import { useTranslation } from 'react-i18next';
-
-const UsersPage = () => {
+import { useCourseStore } from '../../../hooks/course';
+const CoursePage = () => {
   const { t } = useTranslation();
-  const { usersState, dispatchGetAllUsers, dispatchDeleteUser } = useUsersStore();
 
+  const { coursesState, dispatchGetAllCourse, dispatchDeleteCourse } = useCourseStore();
   const [page, setPage] = useState(1);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
 
@@ -26,22 +24,23 @@ const UsersPage = () => {
     status: false,
     id: ''
   });
+
   const [openEditPasswordModal, setOpenEditPasswordModal] = useState({
     status: false,
     id: ''
   });
 
   useEffect(() => {
-    dispatchGetAllUsers();
-  }, [dispatchGetAllUsers]);
+    dispatchGetAllCourse(1);
+  }, [dispatchGetAllCourse]);
 
   useEffect(() => {
-    setPage(usersState.pagination.currentPage);
-  }, [usersState.pagination.currentPage]);
+    setPage(coursesState.pagination.currentPage);
+  }, [coursesState.pagination.currentPage]);
 
-  const users = useMemo(() => {
-    return usersState.users;
-  }, [usersState.users]);
+  const course = useMemo(() => {
+    return coursesState.course;
+  }, [coursesState.course]);
 
   const handleChangeEditUserModal = useCallback((props) => {
     if (typeof props === 'boolean') {
@@ -68,30 +67,30 @@ const UsersPage = () => {
     }
   }, []);
 
-  const handleChangeEditPasswordModal = useCallback((props) => {
-    if (typeof props === 'boolean') {
-      setOpenEditPasswordModal({
-        status: props,
-        id: ''
-      });
-    } else if (typeof props !== 'object') {
-      return undefined;
-    }
+  // const handleChangeEditPasswordModal = useCallback((props) => {
+  //   if (typeof props === 'boolean') {
+  //     setOpenEditPasswordModal({
+  //       status: props,
+  //       id: ''
+  //     });
+  //   } else if (typeof props !== 'object') {
+  //     return undefined;
+  //   }
 
-    const { status, id } = props;
+  //   const { status, id } = props;
 
-    if (!id) {
-      setOpenEditPasswordModal({
-        status: false,
-        id: ''
-      });
-    } else {
-      setOpenEditPasswordModal({
-        status,
-        id
-      });
-    }
-  }, []);
+  //   if (!id) {
+  //     setOpenEditPasswordModal({
+  //       status: false,
+  //       id: ''
+  //     });
+  //   } else {
+  //     setOpenEditPasswordModal({
+  //       status,
+  //       id
+  //     });
+  //   }
+  // }, []);
 
   const handleEdit = (params) => {
     handleChangeEditUserModal({
@@ -101,17 +100,20 @@ const UsersPage = () => {
   };
 
   const handleDelete = (params) => {
-    dispatchDeleteUser({
+    dispatchDeleteCourse({
       id: params?.id || ''
     });
-    // setPage(1)
+    setPage(1);
   };
 
   // Ngoài những thuộc tính trong này, có thể xem thêm thuộc tính của columns table trong ~/ui-component/molecules/DataTable nha. Có giải thích rõ ràng ở đó
   const columns = [
-    { field: 'name', headerName: t('table.user.name'), flex: 3, align: 'center', headerAlign: 'center' },
-    { field: 'email', headerName: t('table.user.email'), flex: 3, align: 'center', headerAlign: 'center' },
-    { field: 'role', headerName: t('table.user.role'), flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'course', headerName: 'Tên khóa học', flex: 2, align: 'center', headerAlign: 'center' },
+    { field: 'session', headerName: 'Thời gian khóa học', flex: 2, align: 'center', headerAlign: 'center' },
+    // { field: 'phoneNumber', headerName: 'Số điện thoại', flex: 3, align: 'center', headerAlign: 'center' },
+    // { field: 'birthday', headerName: 'Ngày sinh', flex: 2, align: 'center', headerAlign: 'center' },
+    // { field: 'address', headerName: 'Địa chỉ', flex: 2, align: 'center', headerAlign: 'center' },
+    // { field: 'teachingschedule', headerName: 'Lịch dạy', flex: 2, align: 'center', headerAlign: 'center' },
     {
       field: 'actions',
       headerName: t('table.user.actions'),
@@ -135,10 +137,10 @@ const UsersPage = () => {
 
   const handleChange = useCallback(
     (event, value) => {
-      dispatchGetAllUsers({ params: { page: value } });
+      dispatchGetAllCourse({ params: { page: value } });
       setPage(value);
     },
-    [dispatchGetAllUsers]
+    [dispatchGetAllCourse]
   );
 
   return (
@@ -158,24 +160,23 @@ const UsersPage = () => {
         </Button>
       </ControlBar>
       <DataTableWrapper>
-        <DataTable columns={columns} rows={users} checkboxSelection={false} />
+        <DataTable columns={columns} rows={course} checkboxSelection={false} />
       </DataTableWrapper>
       <PaginationWrapper>
-        <Pagination count={usersState.pagination.totalPages} page={page} onChange={handleChange} color="primary" />
+        <Pagination count={coursesState.pagination.totalPages} page={page} onChange={handleChange} color="primary" />
       </PaginationWrapper>
-      <AddUserModal open={openAddUserModal} setOpen={setOpenAddUserModal} />
-      <UpdateUserModal
+      <AddCourseModal open={openAddUserModal} setOpen={setOpenAddUserModal} />
+      <UpdateCourseModal
         id={openEditUserModal.id}
         open={openEditUserModal.status}
         setOpen={handleChangeEditUserModal}
-        handleChangeEditPasswordModal={handleChangeEditPasswordModal}
+        // handleChangeEditPasswordModal={handleChangeEditPasswordModal}
       />
-      <ChangePasswordModal id={openEditPasswordModal.id} open={openEditPasswordModal.status} setOpen={handleChangeEditPasswordModal} />
     </MainCard>
   );
 };
 
-export default memo(UsersPage);
+export default memo(CoursePage);
 
 const ControlBar = styled.div`
   width: 100%;

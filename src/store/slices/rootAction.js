@@ -7,3 +7,7 @@ export * from './places';
 export * from './explain';
 export * from './timesheet';
 export * from './notification';
+export * from './student';
+export * from './teacher';
+export * from './course';
+export * from './classes';

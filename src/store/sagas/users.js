@@ -33,7 +33,7 @@ import {
 function* requestAllUsersSaga(action) {
   try {
     const data = yield call(getAllUsersApi, action.payload);
-
+    console.log('data1111', typeof data);
     yield put(
       getAllUserSuccess({
         page: data?.page,

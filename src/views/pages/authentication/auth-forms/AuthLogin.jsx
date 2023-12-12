@@ -56,14 +56,11 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            console.log('value login', values);
             const result = dispatchLogin({
               email: values.email,
               password: values.password
             });
-
             if (result) {
-              console.log('authenticationState', authenticationState);
               setStatus({ success: true });
               setSubmitting(false);
             }

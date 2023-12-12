@@ -25,15 +25,16 @@ export const authentication = createSlice({
       state.rememberMe = action.payload;
     },
     loginRequest: () => {
-      console.log("auth slices")
+      console.log('auth slices');
       // request login
     },
     loginSuccess: (state, action) => {
       const { accessToken, refreshToken, loginInfo } = action.payload;
+      console.log('accessToken, refreshToken, loginInfo', accessToken, refreshToken, loginInfo);
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
       state.loginInfo = loginInfo;
-      console.log("Slices")
+      console.log('Slices');
       dispatchToast('success', 'Welcome back!');
     },
     loginFail: (_, action) => {

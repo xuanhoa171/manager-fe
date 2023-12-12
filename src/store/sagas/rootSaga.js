@@ -7,6 +7,10 @@ import watchPlaces from './places';
 import watchExplains from './explain';
 import watchTimesheet from './timesheet';
 import watchNotification from './notification';
+import watchStudent from './student';
+import watchTeacher from './teacher';
+import watchCourse from './course';
+import watchClasses from './classes';
 export default function* rootSaga() {
   yield all([
     watchAuthentication(),
@@ -16,6 +20,10 @@ export default function* rootSaga() {
     watchPlaces(),
     watchExplains(),
     watchTimesheet(),
-    watchNotification()
+    watchNotification(),
+    watchStudent(),
+    watchTeacher(),
+    watchCourse(),
+    watchClasses()
   ]);
 }

@@ -7,8 +7,9 @@ function* loginRequestSaga(action) {
   try {
     console.log('saga');
     const data = yield call(loginRequestApi, action.payload);
+
     const userRole = data.user.role;
-    if (userRole == 'admin' || userRole == 'manager') {
+    if (userRole == 'admin') {
       yield put(
         loginSuccess({
           accessToken: data.tokens?.access,

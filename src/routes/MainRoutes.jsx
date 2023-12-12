@@ -18,6 +18,10 @@ const ForgotCheckoutReportPage = Loadable(lazy(() => import('~/views/pages/reque
 const LeaveRequestPage = Loadable(lazy(() => import('~/views/pages/requestForm/LeaveRequest')));
 const LateAttendanceRequestPage = Loadable(lazy(() => import('~/views/pages/requestForm/LateAttendanceRequest')));
 
+const StudentPage = Loadable(lazy(() => import('~/views/pages/students')));
+const TeacherPage = Loadable(lazy(() => import('~/views/pages/teacher')));
+const CoursePage = Loadable(lazy(() => import('~/views/pages/course')));
+const ClassPage = Loadable(lazy(() => import('~/views/pages/class')));
 function ProtectedRoute() {
   // Kiểm tra trạng thái đăng nhập ở đây
   const { authenticationState } = useAuthenticationStore(); // Thay checkLoginStatus bằng hàm kiểm tra trạng thái đăng nhập thực tế
@@ -57,26 +61,42 @@ const MainRoutes = {
       element: <Shifts />
     },
     {
-      path: 'organization',
-      element: <OrganizationPage />
+      path: 'students',
+      element: <StudentPage />
     },
     {
-      path: 'request-form',
-      children: [
-        {
-          path: 'leave-request',
-          element: <LeaveRequestPage />
-        },
-        {
-          path: 'late-attendance-request',
-          element: <LateAttendanceRequestPage />
-        },
-        {
-          path: 'forgot-checkout-report',
-          element: <ForgotCheckoutReportPage />
-        }
-      ]
+      path: 'teacher',
+      element: <TeacherPage />
+    },
+    {
+      path: 'course',
+      element: <CoursePage />
+    },
+    {
+      path: 'class',
+      element: <ClassPage />
     }
+    // {
+    //   path: 'organization',
+    //   element: <OrganizationPage />
+    // },
+    // {
+    //   path: 'request-form',
+    //   children: [
+    //     {
+    //       path: 'leave-request',
+    //       element: <LeaveRequestPage />
+    //     },
+    //     {
+    //       path: 'late-attendance-request',
+    //       element: <LateAttendanceRequestPage />
+    //     },
+    //     {
+    //       path: 'forgot-checkout-report',
+    //       element: <ForgotCheckoutReportPage />
+    //     }
+    //   ]
+    // }
   ]
 };
 

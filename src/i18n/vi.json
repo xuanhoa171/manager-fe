@@ -7,7 +7,10 @@
     "dashboard": "Bảng thống kê",
     "users": "Quản lý người dùng",
     "organization": "Quản lý tổ chức",
-    "shifts": "Quản lý ca làm việc",
+    "shifts": "Quản lý học sinh",
+    "teacher": "Quản lý giáo viên",
+    "course": "Quản lý khóa học",
+    "class": "Quản lý lớp học",
     "requestForm": "Quản lý đơn từ",
     "submenu": {
       "requestForm": {

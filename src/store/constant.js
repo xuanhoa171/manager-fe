@@ -4,16 +4,12 @@ export const drawerWidth = 260;
 export const appDrawerWidth = 320;
 export const roles = [
   {
-    label: 'Giám đốc',
+    label: 'Admin',
     value: 'admin'
   },
   {
-    label: 'Quản lý tổ chức',
-    value: 'manager'
-  },
-  {
-    label: 'Quản lí địa điểm',
-    value: 'leader'
+    label: 'Giáo viên',
+    value: 'teacher'
   },
   {
     label: 'Nhân viên',

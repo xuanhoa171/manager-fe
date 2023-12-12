@@ -1,5 +1,6 @@
 import axiosClient from './axiosClient';
 const getAllUsersApi = (params) => {
+  console.log(params);
   return axiosClient.get('/users', params);
 };
 
@@ -23,7 +24,7 @@ const requestUpdateUserApi = (params) => {
   if (!id) throw new Error('Id is required');
 
   delete params['id'];
-  return axiosClient.put(`/users/${id}`, params);
+  return axiosClient.patch(`/users/${id}`, params);
 };
 
 const requestUpdatePasswordApi = (params) => {

@@ -8,6 +8,9 @@
     "users": "Users Management",
     "organization": "Organization Management",
     "shifts": "Shift Management",
+    "teacher": "Teacher Management",
+    "course": "Course Management",
+    "class": "Class Management",
     "requestForm": "Request Form Management",
     "submenu": {
       "requestForm": {
